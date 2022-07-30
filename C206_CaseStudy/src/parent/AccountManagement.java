@@ -12,9 +12,8 @@ import java.util.ArrayList;
 import java.util.Random;
 
 /**
- * I declare that this code was written by me.
- * I will not copy or allow others to copy my code.
- * I understand that copying code is considered as plagiarism.
+ * I declare that this code was written by me. I will not copy or allow others
+ * to copy my code. I understand that copying code is considered as plagiarism.
  *
  * 18047206 Lim Shi Jie, 18 April 2022, 10.17 am
  */
@@ -139,15 +138,15 @@ public class AccountManagement {
 
 	private static void viewAll(ArrayList<Registeration> parentList) {
 		// TODO Auto-generated method stub
-		String output = String.format("%-20s%-20s%-20s%-20s%-20s%-20s%-20s%-20s%-20s", "StudentID", "Student Name",
-				"grade", "classroom", "teacher", "parent", "parent Email", "parent number", "registeration ID");
+		String output = "";
 		output += getParentDetails(parentList);
 
 		System.out.println(output);
 	}
 
 	private static String getParentDetails(ArrayList<Registeration> parentList) {
-		String output = "";
+		String output = String.format("%-20s%-20s%-20s%-20s%-20s%-20s%-20s%-20s%-20s", "StudentID", "Student Name",
+				"grade", "classroom", "teacher", "parent", "parent Email", "parent number", "registeration ID");
 		for (int i = 0; i < parentList.size(); i++) {
 			output += String.format("\n%-20s%-20s%-20s%-20s%-20s%-20s%-20s%-20s%-20s", parentList.get(i).getStudentID(),
 					parentList.get(i).getStudentName(), parentList.get(i).getGrade(), parentList.get(i).getClassroom(),
