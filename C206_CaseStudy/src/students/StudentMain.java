@@ -22,8 +22,8 @@ public class StudentMain {
 
 		ArrayList<Student> studList = new ArrayList<Student>();
 		
-		studList.add(new Student(22345678, "Ben Lim", 9, "W64H", "Ms Denise"));
-		studList.add(new Student(21083574, "Shirley Tan", 10, "E62M", "Mr William"));
+		studList.add(new Student("22345678", "Ben Lim", 9, "W64H", "Ms Denise"));
+		studList.add(new Student("21083574", "Shirley Tan", 10, "E62M", "Mr William"));
 		
 		int option = 0;
 		
@@ -58,7 +58,7 @@ public class StudentMain {
 		output += String.format("%-10s%-15s%-10s%-10s%-20s\n", "ID", "NAME", "GRADE", "CLASS", "TEACHER");
 		
 		for (int i = 0; i < studList.size(); i++) {
-			output += String.format("%-10d%-15s%-10d%-10s%-20s\n", studList.get(i).getID(), studList.get(i).getName(),
+			output += String.format("%-10s%-15s%-10d%-10s%-20s\n", studList.get(i).getID(), studList.get(i).getName(),
 					studList.get(i).getGrade(), studList.get(i).getStudClass(),studList.get(i).getTeacher());
 		}
 		System.out.println(output);
@@ -66,7 +66,7 @@ public class StudentMain {
 	
 	public static void addStudent(ArrayList<Student> studList) {
 		boolean studAdd = false;
-		int id = Helper.readInt("Enter new student ID > ");
+		String id = Helper.readString("Enter new student ID > ");
 		String name = Helper.readString("Enter new student name > ");
 		int grade = Helper.readInt("Enter new student grade > ");
 		String studClass = Helper.readString("Enter new student class > ");
@@ -86,6 +86,19 @@ public class StudentMain {
 	}
 	
 	public static void deleteStudent(ArrayList<Student> studList) {
-	
+		String id = Helper.readString("Enter student ID to be deleted > ");
+		boolean delete = false;
+		
+		for (int i = 0; i < studList.size();) {
+			if(studList.get(i).getID().equals(id)) {
+				studList.remove(i);
+				delete = true;	
+			}
+		}
+		if (delete) {
+			System.out.println("Student deleted!");
+		} else {
+			System.out.println("Failed to delete student!");
+		}
 	}
 }
