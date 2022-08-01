@@ -5,9 +5,6 @@ package students;
 
 import java.util.ArrayList;
 
-import cca_details.CCA;
-import cca_details.Helper;
-
 /**
  * @author 21027690
  *
@@ -89,10 +86,10 @@ public class StudentMain {
 		String id = Helper.readString("Enter student ID to be deleted > ");
 		boolean delete = false;
 		
-		for (int i = 0; i < studList.size();) {
+		for (int i = 0; i < studList.size(); i++) {
 			if(studList.get(i).getID().equals(id)) {
 				studList.remove(i);
-				delete = true;	
+				delete = true;
 			}
 		}
 		if (delete) {
