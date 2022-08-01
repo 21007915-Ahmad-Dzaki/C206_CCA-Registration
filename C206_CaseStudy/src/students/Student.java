@@ -9,13 +9,13 @@ package students;
  */
 public class Student {
 
-	private int id;
+	private String id;
 	private String name;
 	private int grade;
 	private String studClass;
 	private String teacher;
 	
-	public Student (int id, String name, int grade, String studClass, String teacher) {
+	public Student (String id, String name, int grade, String studClass, String teacher) {
 		this.id = id;
 		this.name = name;
 		this.grade = grade;
@@ -23,11 +23,11 @@ public class Student {
 		this.teacher = teacher;
 	}
 	
-	public int getID() {
+	public String getID() {
 		return id;
 	}
 	
-	public void setID(int id) {
+	public void setID(String id) {
 		this.id = id;
 	}
 	
