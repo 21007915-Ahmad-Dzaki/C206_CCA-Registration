@@ -41,10 +41,14 @@ public class CCA_App {
 				viewAllCCA(ccaList);
 			}
 			else if (option == 2) {
-				addCCA(daysList,ccaList);
+				CCA cca = inputCCAadd(daysList);
+				addCCA(ccaList,cca);
+				System.out.println("CCA has been added!");
 			}
 			else if (option == 3) {
-				deleteCCA(ccaList);
+				CCA cca = inputCCAdel(ccaList);
+				deleteCCA(ccaList,cca);
+				System.out.println("CCA has been deleted!");
 			}
 			else if (option == 4) {
 				System.out.println("Thank you for using our App!");
@@ -54,49 +58,58 @@ public class CCA_App {
 		
 		
 	}
+	public static String retrieveAllCCA(ArrayList<CCA> ccaList) {
+		String output = "";
+
+		for (int i = 0;i<ccaList.size();i++) {
+			output += ccaList.get(i).display();
+		}
+		return output;
+	}
 	public static void viewAllCCA(ArrayList<CCA> ccaList) {
 		String output = "\nLIST OF CCA\n";
 		output += Helper.line(12,"-");
-		for (int i = 0;i<ccaList.size();i++) {
-			output += String.format((i+1) + ". %s\n", ccaList.get(i).getTitle());
-		}
+		output += String.format("%-23s %-25s %-13s %-12s %-18s %-15s %-10s\n", 
+				"TITLE","DESCRIPTION","CLASS SIZE","DAY","TIME","VENUE","IN-CHARGE");
+		output += retrieveAllCCA(ccaList);
+		
 		System.out.println(output);
 	}
 	
-	public static void addCCA(String[] daysList,ArrayList<CCA> ccaList) {
-		
-		boolean add = false;
-		String output = String.format("%-23s %-25s %-13s %-12s %-18s %-15s %-10s\n", 
-				"TITLE","DESCRIPTION","CLASS SIZE","DAY","TIME","VENUE","IN-CHARGE");
-		
+	public static CCA inputCCAadd(String[] daysList) {
 		String title = Helper.readString("Enter CCA Title > ");
 		String desc = Helper.readString("Enter CCA Description > ");
 		int classSize = Helper.readInt("Enter CCA Class Size > ");
+
+		
+		while(classSize>50 || classSize<0) {
+			System.out.println("Class Size should be 50 or less");
+			classSize = Helper.readInt("Enter CCA Class Size > ");		
+		}
+		
 		String day = Helper.readString("Enter Day of CCA > ");
-		String time = Helper.readString("Enter Duration of CCA > ");
+		
+//		for (int i = 0;i<daysList.length;i++) {
+//			while(day.equals(daysList[i])){
+//				System.out.println("Enter a valid day");
+//				day = Helper.readString("Enter Day of CCA > ");
+//			}
+//
+//		}
+		String time = Helper.readString("Enter Duration of CCA (__pm -__pm)> ");
 		String venue = Helper.readString("Enter venue of CCA > ");
 		String name = Helper.readString("Enter Name of Instructor In-Charge > ");
+
+		CCA cca= new CCA(title,desc,classSize,day,time,venue,name);
+		return cca;
 		
-		if(classSize<=50) {
-			for (int i = 0;i<daysList.length;i++) {
-				if(daysList[i].equalsIgnoreCase(day)) {
-					ccaList.add(new CCA(title,desc,classSize,day,time,venue,name));
-					add = true;
-				}else {
-					System.out.println("Please enter a valid day!");
-					break;
-				}
-			}
-		}else {
-			System.out.println("Class size must not be more than 50!");
-			
-		}
+	}
+	
+	public static void addCCA(ArrayList<CCA> ccaList, CCA cca) {
 		
-		if(add) {
-			System.out.println("CCA added!");
-		}else {
-			System.out.println("Failed to add CCA");
-		}
+		ccaList.add(cca);
+		
+		
 	}
 	
 	public static void menu() {
@@ -107,29 +120,34 @@ public class CCA_App {
 		System.out.println("3. Delete CCA");
 		System.out.println("4. Quit");
 	}
-	
-	public static void deleteCCA(ArrayList<CCA> ccaList) {
-		String output = String.format("%-23s %-25s %-13s %-12s %-18s %-15s %-10s\n", 
-				"TITLE","DESCRIPTION","CLASS SIZE","DAY","TIME","VENUE","IN-CHARGE");
-		System.out.println("DELETING CCA");
-		String name = Helper.readString("Enter name of CCA > ");
-		boolean del = false;
-		boolean removed = false;
-		
-		for (CCA c:ccaList) {
-			if (c.getName().equalsIgnoreCase(name)) {
-				output += c.display();
-				del = Helper.readBoolean("Confirm to delete? (Y/N)");
-				if (del) {
-					ccaList.remove(c);
-					removed = true;
-				}
+	public static CCA inputCCAdel(ArrayList<CCA> ccaList) {
+		String title = Helper.readString("Enter CCA Title > ");
+		String desc = "";
+		int classSize = 0;
+		String day = "";
+		String time = "";
+		String venue = "";
+		String name = "";
+
+
+		for (CCA c: ccaList) {
+			if (title.equals(c.getTitle())){
+				title = c.getTitle();
+				desc = c.getDescription();
+				classSize = c.getClassSize();
+				day = c.getDay();
+				time = c.getTime();
+				venue = c.getVenue();
+				name = c.getName();
 			}
 		}
-		if (removed) {
-			System.out.println("CCA has been deleted");
-		}else {
-			System.out.println("Failed to delete CCA");
-		}
+		CCA cca= new CCA(title,desc,classSize,day,time,venue,name);
+		return cca;	
+	}
+	public static void deleteCCA(ArrayList<CCA> ccaList,CCA cca) {
+		System.out.println("DELETING CCA");
+
+		ccaList.remove(cca);
+
 	}
 }
