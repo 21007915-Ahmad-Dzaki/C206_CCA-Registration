@@ -1,4 +1,5 @@
 package cca_cat;
+
 import java.util.ArrayList;
 
 /**
@@ -14,61 +15,86 @@ public class Main {
 	/**
 	 * @param args
 	 */
-	ArrayList<Category> obj = new ArrayList<Category>();
 	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
+		ArrayList<Category> obj = new ArrayList<Category>();
+		obj.add(new Category("Test" ));
 		Main main = new Main();
-		main.start();
+		main.start(obj);
 	}
 	
-	public void start() {
-		obj.add(new Category("Test" ));
-//		obj.add(new CCADetails("Test","test2"));
+	public void start(ArrayList<Category> obj) {
 
 		int option = -1;
 		while (option != 4) {
 			menu();
 			option = Helper.readInt("Enter num 1-3 OR 4 to end > ");
 			if (option == 1) {
-				viewCat();
+				viewCat(obj);
 			} else if (option == 2) {
-				addCat();
+				addCat(obj, inputAddCat());
 			} else if (option == 3) {
-				removeCat();
+				removeCat(obj);
 			}
 		}
 	}
-	
+
 	public void menu() {
 		Helper.line(30, "=");
 		System.out.println("1. View All\n2. Add Cat\n3. Remove Cat\n4. End");
 		Helper.line(30, "=");
 	}
-	public void viewCat() {
-		for (Category C : obj) {
-			System.out.println(C.getCname());
-//			CCADetails S = (CCADetails) C;
-//			if (!S.getName().equals(null)) {
-//				System.out.println(S.getName());
-//			}
-			
-		}
-	}
-	public void addCat() {
-		String input = Helper.readString("Enter Category name > ");
-		obj.add(new Category(input));
-//		obj.add(new CCADetails(input, ""));
+
+	//View All Cat
+	private static void viewCat(ArrayList<Category> obj) {
+		// TODO Auto-generated method stub
+		String output = "Categories: ";
+		output += loadData(obj);
+		System.out.println(output);
 	}
 	
-	public void removeCat() {
+	//Add Cat
+	public static Category inputAddCat() {
 		String input = Helper.readString("Enter Category name > ");
+		Category input2 = new Category(input);
+		return input2;
+	}
+	
+	public static void addCat(ArrayList<Category> obj, Category input) {
+		obj.add(input);
+	}
+	
+	//Remove Cat
+	public static boolean isExist(ArrayList<Category> obj, String input) {
+		boolean check = false;
 		for (int i = 0; i < obj.size(); i++) {
-			if (obj.get(i).getCname().equals(input)) {
+			if (obj.get(i).getCname().equalsIgnoreCase(input)) {
 				obj.remove(i);
+				check = true;
 			}
 		}
-
+		return check;
+	}
+	public static void removeCat(ArrayList<Category> obj) {
+		String input = Helper.readString("Enter Category name > ");
+		boolean check = isExist(obj, input);
+		
+		if (check == true) {
+			System.out.println("Remove Successful");
+		} else if (check == false) {
+			System.out.println("Name does not exist! Remove fail!");
+		}
+	}
+	
+	//Load ArrayData
+	public static String loadData(ArrayList<Category> obj) {
+		String output = "";
+		for (Category C : obj) {
+			output += "\n" + C.getCname();
+		}
+		return output;
 	}
 
+	
 }
