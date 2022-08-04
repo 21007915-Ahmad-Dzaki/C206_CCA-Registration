@@ -80,9 +80,10 @@ public class C206_CaseStudyTest {
 		
 		//test that CCA is removed from list (normal)
 		
-		C206_CaseStudy.deleteCCA(ccaList,cca2.getTitle());
-		assertTrue(ccaList.contains(cca2));
+		C206_CaseStudy.deleteCCA(ccaList,cca2);
+		assertEquals(ccaList.get(0).getTitle(),"Little League Soccer");
 		assertEquals(ccaList.size(),1);
+
 		
 		//test 
 	}

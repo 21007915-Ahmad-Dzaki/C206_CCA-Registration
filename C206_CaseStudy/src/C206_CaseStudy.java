@@ -19,7 +19,6 @@ public class C206_CaseStudy {
 		String[] daysList = {"Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"};
 		ArrayList<CCA> ccaList = new ArrayList<CCA>();
 		ArrayList<Student> studentList = new ArrayList<Student>();
-		
 		ArrayList<Instructor> insList = new ArrayList<Instructor>();
 		ArrayList<Admin> adminList = new ArrayList<Admin>();
 		ArrayList<Parent> parentList = new ArrayList<Parent>();
@@ -38,12 +37,13 @@ public class C206_CaseStudy {
 		catList.add(new Category("Sport",emptyCCAlist));
 		
 		parentList.add(new Parent("6","Ben Lim", 9, "W64H", "Ms Denise",6,"Lim","Lim@gmail.com",90110241));
-		
+		//id = 1234 pw:roar
 		adminList.add(new Admin("Shinji",1234,"roar"));
 		
 		insList.add(new Instructor(1234,"Mr Izzat","roar"));
 		insList.add(new Instructor(4321,"Mr Jordon","roar"));
 		
+		//student login use 6,6
 		studentList.add(new Student("6","Ben Lim", 4, "W64H", "Ms Denise",6));
 		studentList.add(new Student("5","Izzat", 5, "W64H", "Mr Joseph",5));
 		studentList.add(new Student("3","Lim Chong Hin", 9, "W64H", "Ms Denise",3));
@@ -125,8 +125,7 @@ public class C206_CaseStudy {
 							addCCA(ccaList,cca);
 							System.out.println("CCA has been added!");
 						} else if (option == 3) {
-							String title = inputCCAdel(ccaList);
-							deleteCCA(ccaList,title);
+							deleteCCA(ccaList,inputCCAdel(ccaList));
 						} else if (option == 4) {
 							viewCCAStudents(studentList);
 						} else if (option == 5){
@@ -163,8 +162,7 @@ public class C206_CaseStudy {
 							addCCA(ccaList,cca);
 							System.out.println("CCA has been added!");
 						} else if (option == 3) {
-							String title = inputCCAdel(ccaList);
-							deleteCCA(ccaList,title);
+							deleteCCA(ccaList,inputCCAdel(ccaList));
 						} else if (option == 4) {
 							viewCCAStudents(studentList);
 						} else if (option == 5){
@@ -673,34 +671,31 @@ public class C206_CaseStudy {
 		System.out.println("CCA Category added!");
 	}
 	//=======================================DELETE METHODS=====================================================
-	public static String inputCCAdel(ArrayList<CCA> ccaList) {
+	public static CCA inputCCAdel(ArrayList<CCA> ccaList) {
 		boolean found = false;
 		String title = Helper.readString("Enter CCA Title > ");
+		int index = 0;
 
 		for (int i = 0; i < ccaList.size();i++) {
-			if (title.equalsIgnoreCase(ccaList.get(i).getTitle()) == true){
-				title = ccaList.get(i).getTitle();
+			if (title.equalsIgnoreCase(ccaList.get(i).getTitle())){
+				index=i;
 				found = true;
 			}
 		}
 		if (found) {
-			return title;	
+			System.out.println(index);
+			return ccaList.get(index);	
 		}else {
 			return null;
 		}
 		
 	}
-	public static void deleteCCA(ArrayList<CCA> ccaList, String title) {
-		boolean remove = false;
-		if (title != null) {
-			for (int i = 0; i < ccaList.size();i++) { 
-				if (title.equalsIgnoreCase(ccaList.get(i).getTitle()) == true);
-				ccaList.remove(i);
+	public static void deleteCCA(ArrayList<CCA> ccaList, CCA c) {
+		if (c != null) {
+			
+				ccaList.remove(c);
 				System.out.println("DELETING CCA....");
 				System.out.println("CCA has been deleted");
-				remove = true;
-			}
-
 		}else {
 			System.out.println("CCA not found!");
 		}
