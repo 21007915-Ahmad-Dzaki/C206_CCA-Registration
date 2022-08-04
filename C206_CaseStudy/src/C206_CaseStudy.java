@@ -413,7 +413,9 @@ public class C206_CaseStudy {
 		System.out.println("14. Delete Parent");
 		System.out.println("15. Logout");
 	}
-	//=================================VIEW Methods==================================================
+	
+	//=================================VIEW Methods==================================================//
+	
 	private static void mainMenu() {
 		// TODO Auto-generated method stub
 		Helper.line(80, "=");
@@ -495,7 +497,9 @@ public class C206_CaseStudy {
 		System.out.println(output);
 		
 	}
-	//=============================================ADD Methods======================================
+	
+	//=============================================ADD Methods======================================//
+	
 	public static void studCCAReg(ArrayList<CCA> ccaList,ArrayList<Student> studentList, String id) {
         // TODO Auto-generated method stub
         String output = String.format("%-30s", "CCA List:");
