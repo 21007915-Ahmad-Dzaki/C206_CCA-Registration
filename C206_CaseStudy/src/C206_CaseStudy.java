@@ -235,12 +235,12 @@ public class C206_CaseStudy {
 		String login = "zero";
 		while (!success) {
 			String LoginStudentID = Helper.readString("Enter Student ID > ");
-			String registrationID = Helper.readString("Enter CCA Registration ID > ");
+			int registrationID = Helper.readInt("Enter CCA Registration ID > ");
 			
 			for (Student s : studentList) {
 				if (LoginStudentID.equals(s.getID())) { 
 					foundStudent = true;
-					if(registrationID.equals(s.getRegistrationID())) {
+					if(registrationID == s.getRegistrationID()) {
 						System.out.println("\nLogin Successful!\n");
 						
 						success = true;
