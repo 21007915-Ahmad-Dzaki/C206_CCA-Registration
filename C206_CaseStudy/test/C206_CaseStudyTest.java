@@ -116,9 +116,21 @@ public class C206_CaseStudyTest {
 	@Test
 	public void testAddParent() {// shi jie
 		ArrayList<Parent> parentList = new ArrayList<Parent>();
-		parentList.add(mem1);
+		C206_CaseStudy.addParent(parentList);
+		
 		assertSame("parentList size is 1", parentList.size(), 1);
 		assertFalse(parentList.isEmpty());
+	}
+	@Test
+	public void testAddParent2() {// shi jie
+		ArrayList<Parent> parentList = new ArrayList<Parent>();
+		C206_CaseStudy.addParent(parentList);
+		
+		C206_CaseStudy.addParent(parentList);
+		C206_CaseStudy.addParent(parentList);
+		String mem4 =parentList.get(1).getID();
+		assertSame("parentList at index 1 is same as m4", parentList.get(1).getID(), mem4);
+
 	}
 
 	@Test
@@ -136,17 +148,26 @@ public class C206_CaseStudyTest {
 
 		parentList.add(mem1);
 		parentList.add(mem2);
-		Parent mem3 = parentList.remove(1);
-		assertSame(mem3, mem2);
+		parentList.add(mem3);
+		Parent mem4 = parentList.remove(1);
+		assertTrue(mem2.getID().equals(mem4.getID()));
 
 	}
 
 	@Test
 	public void testDeleteBountry() {
+		ArrayList<Parent> parentList = new ArrayList<Parent>();
+		assertTrue(parentList.isEmpty());
+		parentList.add(mem1);
+		parentList.add(mem2);
+		
+		C206_CaseStudy.deleteParent(parentList);
+		assertTrue(parentList.size() == 1);
 	}
 
 	@Test
 	public void testDeleteError() {
+
 	}
 
 	@Test
