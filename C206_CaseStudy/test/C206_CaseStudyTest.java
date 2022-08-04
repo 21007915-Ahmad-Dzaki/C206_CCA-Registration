@@ -93,6 +93,23 @@ public class C206_CaseStudyTest {
 		assertFalse(ccaList.contains(cca2));
 		
 	}
+	@Test
+	public void testAddParent() {//shi jie
+		ArrayList<Parent> parentList = new ArrayList<Parent>();
+		parentList.add(new Parent("6","Ben Lim", 9, "W64H", "Ms Denise",6,"Lim","Lim@gmail.com",90110241));
+		assertSame("parentList size is 1",parentList.size(),1);
+	}
+	@Test
+	public void testAddParentBountry() {//shi jie
+		ArrayList<Parent> parentList = new ArrayList<Parent>();
+		parentList.add(new Parent("6","Ben Lim", 9, "W64H", "Ms Denise",6,"Lim","Lim@gmail.com",90110241));
+		assertSame("parentList size is 1",parentList.size(),1);
+		parentList.remove(0);
+		assertSame("parentList size is 0",parentList.size(),0);
+		parentList.add(new Parent("7","Benny  Lim", 9, "W64H", "Ms jasmine",7,"Lim","Lim@gmail.com",99999999));
+		parentList.add(new Parent("6","Ben Lim", 9, "W64H", "Ms Denise",8,"Lim","Lim@gmail.com",88888888));
+		assertSame("parentList size is 2",parentList.size(),2);
+	}
 
 	@Test
 	public void c206_test() {
