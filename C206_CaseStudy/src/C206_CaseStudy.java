@@ -23,6 +23,17 @@ public class C206_CaseStudy {
 		ArrayList<Instructor> insList = new ArrayList<Instructor>();
 		ArrayList<Admin> adminList = new ArrayList<Admin>();
 		ArrayList<Parent> parentList = new ArrayList<Parent>();
+		ArrayList<Category> catList = new ArrayList<Category>();
+		ArrayList<CCA> emptyCCAlist = new ArrayList<CCA>();
+		
+		CCA cca1 = new CCA("Little League Soccer","Soccer Club for Boys",30, 
+				"Wednesday", "2:00PM - 4:00PM", "School Field", "Mr Izzat", emptyList);
+		CCA cca2 = new CCA("LEGO Expert", "LEGO building masters", 40, 
+				"Tuesday", "2:00PM - 3:00PM", "E62A", "Mr Jordon", emptyList);
+		
+		emptyCCAlist.add(cca1);
+		
+		catList.add(new Category("Sport",emptyCCAlist));
 		
 		parentList.add(new Parent("6","Ben Lim", 9, "W64H", "Ms Denise",6,"Lim","Lim@gmail.com",90110241));
 		
@@ -37,10 +48,7 @@ public class C206_CaseStudy {
 		studentList.add(new Student("4","Jordon", 9, "W64H", "Mr Ivan",4));
 		studentList.add(new Student("2","Shi Jie", 1, "W64H", "Mr Ivan", 0));
 		
-		CCA cca1 = new CCA("Little League Soccer","Soccer Club for Boys",30, 
-				"Wednesday", "2:00PM - 4:00PM", "School Field", "Mr Izzat", emptyList);
-		CCA cca2 = new CCA("LEGO Expert", "LEGO building masters", 40, 
-				"Tuesday", "2:00PM - 3:00PM", "E62A", "Mr Jordon", emptyList);
+		
 		ccaList.add(cca1);
 		ccaList.add(cca2);
 		
@@ -53,7 +61,7 @@ public class C206_CaseStudy {
 			}else if (option == 2) {
 				startInstructor(daysList,insList,ccaList,studentList);
 			}else if (option == 3) {
-				startAdmin(daysList,adminList,ccaList,studentList,parentList);
+				startAdmin(daysList,adminList,ccaList,studentList,parentList,catList,emptyCCAlist);
 			}else if (option == 4) {
 				startParent(parentList,ccaList,studentList);
 			}
@@ -132,7 +140,8 @@ public class C206_CaseStudy {
 			}
 		}
 	}
-	public static void startAdmin(String[] daysList,ArrayList<Admin> adminList, ArrayList<CCA> ccaList,ArrayList<Student> studentList, ArrayList<Parent> parentList) {
+	public static void startAdmin(String[] daysList,ArrayList<Admin> adminList, ArrayList<CCA> ccaList,ArrayList<Student> studentList, 
+			ArrayList<Parent> parentList, ArrayList<Category> catList,ArrayList<CCA> emptyCCAlist) {
 
 		int optionLogin = -1;
 		while (optionLogin != Option_QUIT) {
@@ -165,11 +174,11 @@ public class C206_CaseStudy {
 						}else if (option == 8) {
 							deleteStudent(studentList);
 						}else if (option == 9) {
-							
+							viewCat(catList);
 						}else if (option == 10) {
-
+							addCat(catList,inputAddCat(emptyCCAlist));
 						}else if (option == 11) {
-
+							removeCat(catList);
 						}else if (option == 12) {
 							addParent(parentList);
 						}else if (option == 13) {
@@ -471,6 +480,21 @@ public class C206_CaseStudy {
 		}
 		return output;
 	}
+	public static String loadDataCat(ArrayList<Category> obj) {
+		String output = "";
+		for (Category C : obj) {
+			output += "\n- " + C.getCname();
+		}
+		return output;
+	}
+	public static void viewCat(ArrayList<Category> obj) {
+		// TODO Auto-generated method stub
+		String output = "Categories: \n";
+		output += "--------";
+		output += loadDataCat(obj);
+		System.out.println(output);
+		
+	}
 	//=============================================ADD Methods======================================
 	public static void studCCAReg(ArrayList<CCA> ccaList,ArrayList<Student> studentList, String id) {
 		// TODO Auto-generated method stub
@@ -629,9 +653,18 @@ public class C206_CaseStudy {
 		}
 
 	}
+	public static Category inputAddCat(ArrayList<CCA> catList) {
+		String input = Helper.readString("Enter Category name > ");
+		Category input2 = new Category(input,catList);
+		return input2;
+	}
+	
+	public static void addCat(ArrayList<Category> obj, Category input) {
+		obj.add(input);
+		System.out.println("CCA Category added!");
+	}
 	//=======================================DELETE METHODS=====================================================
 	public static int inputCCAdel(ArrayList<CCA> ccaList) {
-		boolean found = false;
 		int index = 0;
 		String title = Helper.readString("Enter CCA Title > ");
 
@@ -680,6 +713,26 @@ public class C206_CaseStudy {
 			}
 		}
 
+	}
+	public static boolean isExist(ArrayList<Category> obj, String input) {
+		boolean check = false;
+		for (int i = 0; i < obj.size(); i++) {
+			if (obj.get(i).getCname().equalsIgnoreCase(input)) {
+				obj.remove(i);
+				check = true;
+			}
+		}
+		return check;
+	}
+	public static void removeCat(ArrayList<Category> obj) {
+		String input = Helper.readString("Enter Category name > ");
+		boolean check = isExist(obj, input);
+		
+		if (check == true) {
+			System.out.println("Remove Successful");
+		} else if (check == false) {
+			System.out.println("Name does not exist! Remove fail!");
+		}
 	}
 	public static int checkRegisterationID(ArrayList<Parent> parentList, Random rand, int ccaRegister) {
 		for (int i = 0; i < parentList.size(); i++) {
