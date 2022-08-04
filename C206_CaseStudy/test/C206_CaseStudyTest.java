@@ -17,6 +17,9 @@ public class C206_CaseStudyTest {
 	private CCA rugby;
 	private Student marshal;
 	private Student lily;
+	private Parent mem1 = new Parent("6", "Ben Lim", 9, "W64H", "Ms Denise", 6, "Lim", "Lim@gmail.com", 90110241);
+	private Parent mem2 = new Parent("7", "Dzaki", 9, "W64H", "Ms jasmine", 7, "Dzaki", "Dzaki@gmail.com", 90110241);
+	private Parent mem3 = new Parent("8", "Dzaki", 9, "W64H", "Ms jasmine", 9, "Dzaki", "Dzaki@gmail.com", 90110241);
 
 	@Before
 	public void setUp() throws Exception {
@@ -113,7 +116,7 @@ public class C206_CaseStudyTest {
 	@Test
 	public void testAddParent() {// shi jie
 		ArrayList<Parent> parentList = new ArrayList<Parent>();
-		parentList.add(new Parent("6", "Ben Lim", 9, "W64H", "Ms Denise", 6, "Lim", "Lim@gmail.com", 90110241));
+		parentList.add(mem1);
 		assertSame("parentList size is 1", parentList.size(), 1);
 		assertFalse(parentList.isEmpty());
 	}
@@ -130,9 +133,6 @@ public class C206_CaseStudyTest {
 	@Test
 	public void testDeleteNormal() {
 		ArrayList<Parent> parentList = new ArrayList<Parent>();
-
-		Parent mem1 = new Parent("6", "Ben Lim", 9, "W64H", "Ms Denise", 6, "Lim", "Lim@gmail.com", 90110241);
-		Parent mem2 = new Parent("7", "Dzaki", 9, "W64H", "Ms jasmine", 7, "Dzaki", "Dzaki@gmail.com", 90110241);
 
 		parentList.add(mem1);
 		parentList.add(mem2);
