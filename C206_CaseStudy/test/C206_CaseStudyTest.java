@@ -110,6 +110,17 @@ public class C206_CaseStudyTest {
 		parentList.add(new Parent("6","Ben Lim", 9, "W64H", "Ms Denise",8,"Lim","Lim@gmail.com",88888888));
 		assertSame("parentList size is 2",parentList.size(),2);
 	}
+	@Test
+	public void testDeleteNormal() {
+		ArrayList<Parent> parentList = new ArrayList<Parent>();
+		parentList.add(new Parent("6","Ben Lim", 9, "W64H", "Ms Denise",6,"Lim","Lim@gmail.com",90110241));
+		assertSame("parentList size is 1",parentList.size(),1);
+		
+	}
+	@Test
+	public void testDeleteBountry() {}
+	@Test
+	public void testDeleteError() {}
 
 	@Test
 	public void c206_test() {
