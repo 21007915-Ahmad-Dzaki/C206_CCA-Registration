@@ -35,7 +35,7 @@ public class CCA_App {
 		int option = 0;
 		
 		while (option != 4) {
-			menu();
+			menuCCA();
 			option = Helper.readInt("Enter an option > ");
 			if (option == 1) {
 				viewAllCCA(ccaList);
@@ -105,14 +105,11 @@ public class CCA_App {
 		
 	}
 	
-	public static void addCCA(ArrayList<CCA> ccaList, CCA cca) {
-		
+	public static void addCCA(ArrayList<CCA> ccaList, CCA cca) {		
 		ccaList.add(cca);
-		
-		
 	}
 	
-	public static void menu() {
+	public static void menuCCA() {
 		System.out.println("WELCOME TO CCA MANAGEMENT SYSTEM");
 		Helper.lines(32, "-");
 		System.out.println("1. View All");
@@ -145,9 +142,7 @@ public class CCA_App {
 		return cca;	
 	}
 	public static void deleteCCA(ArrayList<CCA> ccaList,CCA cca) {
-		System.out.println("DELETING CCA");
-
+		System.out.println("DELETING CCA....");
 		ccaList.remove(cca);
-
 	}
 }

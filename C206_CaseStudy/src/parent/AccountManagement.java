@@ -6,7 +6,7 @@
  * 18047206 Lim Shi Jie, 18 April 2022, 10.17 am
  */
 
-package parent;
+package c206_graded;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -20,10 +20,6 @@ import java.util.Random;
 
 public class AccountManagement {
 
-	/**
-	 * @param args
-	 */
-	// for make code more readable
 	private static final int Option_DEL = 3;
 	private static final int Option_ADD = 2;
 	private static final int Option_VIEW = 1;
@@ -38,6 +34,8 @@ public class AccountManagement {
 		// TODO Auto-generated method stub
 
 		ArrayList<Registeration> parentList = new ArrayList<Registeration>();
+		parentList.add(new Registeration("22345678", "Ben Lim", 1, "W64H", "Ms Denise", "Mr Ben", "test@gmail.com",
+				12345432));
 		int option = -1;
 		while (option != Option_QUIT) {
 			menu();
@@ -47,7 +45,7 @@ public class AccountManagement {
 			} else if (option == Option_ADD) {
 				addParent(parentList);
 			} else if (option == Option_DEL) {
-				deleteParent(parentList);
+//				deleteParent(parentList);
 			} else if (option == Option_QUIT) {
 
 				System.out.println("Thank you for using Account managment application!");
@@ -56,16 +54,18 @@ public class AccountManagement {
 
 	}
 
-	private static void deleteParent(ArrayList<Registeration> parentList) {
+	private static void deleteParent(ArrayList<Parent> parentList) {
 		// TODO Auto-generated method stub
 		int DelRegisterationID = Helper.readInt("enter the registeration ID");
-		int studentID = Helper.readInt("Enter student ID");
+		String studentID = Helper.readString("Enter student ID");
 		for (int i = 0; i < parentList.size(); i++) {
-			if (parentList.get(i).getCcaRegister() == DelRegisterationID
-					&& parentList.get(i).getStudentID() == studentID) {
+			if (DelRegisterationID == parentList.get(i).getCcaRegister()
+					&& parentList.get(i).getID().contains(studentID)) {
 				parentList.remove(i);
-				System.out.println("Parent have been successsfuly deleted");
-				break;
+				System.out.println("Parent account has bee deleted");
+			} else {
+				System.out.println("Parent account does not exist, or already has been deleted");
+
 			}
 		}
 
@@ -73,56 +73,40 @@ public class AccountManagement {
 
 	private static void addParent(ArrayList<Registeration> parentList) {
 		// TODO Auto-generated method stub
-		int studID = Helper.readInt("Enter student ID > ");
+		String studID = Helper.readString("Enter student ID > ");
 		String studName = Helper.readString("Enter student Name > ");
-		String grade = Helper.readString("Enter student grade > ");
+		int grade = Helper.readInt("Enter student grade > ");
+		String classroom = Helper.readString("Enter classroom > ");
+		String teacherName = Helper.readString("Enter teacher name > ");
+		String parentName = Helper.readString("Enter parent name > ");
+		String parentEmail = Helper.readString("Enter parent email > ");
+		String emailPattern = "@";
+		boolean emailMatch = false;
+		while (emailMatch != true) {
+			if (parentEmail.contains(emailPattern)) {
+				emailMatch = true;
 
-		boolean isMatch = false;
-		while (isMatch != true) {
-			String patternGrade = "([P][1-6])";
-			if (grade.matches(patternGrade)) {
-				isMatch = true;
 			} else {
-				isMatch = false;
-				System.out.println("please enter a valid grade e.g P1");
-				grade = Helper.readString("Enter student grade > ");
+				emailMatch = false;
+				System.out.println("Please enter a email in the form of @");
+				parentEmail = Helper.readString("Enter parent email > ");
+
 			}
 		}
+		if (emailMatch) {
+			int parentNumber = Helper.readInt("enter parent number > ");
 
-		if (isMatch) {
-			String classroom = Helper.readString("Enter classroom > ");
-			String teacherName = Helper.readString("Enter teacher name > ");
-			String parentName = Helper.readString("Enter parent name > ");
-			String parentEmail = Helper.readString("Enter parent email > ");
-			String emailPattern = "@";
-			boolean emailMatch = false;
-			while (emailMatch != true) {
-				if (parentEmail.contains(emailPattern)) {
-					emailMatch = true;
+//			 to generate random number
+			Random rand = new Random();
+			int ccaRegister = rand.nextInt(99999);
+			// ensure that parents get the unique CCAregisterID.
+			ccaRegister = checkRegisterationID(parentList, rand, ccaRegister);
 
-				} else {
-					emailMatch = false;
-					System.out.println("Please enter a email in the form of @");
-					parentEmail = Helper.readString("Enter parent email > ");
-
-				}
-			}
-			if (emailMatch) {
-				int parentNumber = Helper.readInt("enter parent number > ");
-
-				// to generate random number
-				Random rand = new Random();
-				int ccaRegister = rand.nextInt(99999);
-				// ensure that parents get the unique CCAregisterID.
-				ccaRegister = checkRegisterationID(parentList, rand, ccaRegister);
-
-				Registeration mem = new Registeration(studID, studName, grade, classroom, teacherName, parentName,
-						parentEmail, parentNumber, ccaRegister);
-				parentList.add(mem);
-				System.out.println("Account have been successsfuly created");
-				System.out.println("Your CCA registeration ID is " + ccaRegister);
-			}
-
+			Registeration mem = new Registeration(studID, studName, grade, classroom, teacherName, parentName,
+					parentEmail, parentNumber);
+			parentList.add(mem);
+			System.out.println("Account have been successsfuly created");
+			System.out.println("Your CCA registeration ID is " + ccaRegister);
 		}
 
 	}
@@ -138,21 +122,20 @@ public class AccountManagement {
 
 	private static void viewAll(ArrayList<Registeration> parentList) {
 		// TODO Auto-generated method stub
-		String output = "";
+		String output = String.format("%-20s%-20s%-20s%-20s%-20s%-20s%-20s%-20s%-20s", "StudentID", "Student Name",
+				"grade", "classroom", "teacher","registeration ID", "parent", "parent Email", "parent number");
 		output += getParentDetails(parentList);
 
 		System.out.println(output);
 	}
 
 	private static String getParentDetails(ArrayList<Registeration> parentList) {
-		String output = String.format("%-20s%-20s%-20s%-20s%-20s%-20s%-20s%-20s%-20s", "StudentID", "Student Name",
-				"grade", "classroom", "teacher", "parent", "parent Email", "parent number", "registeration ID");
+		String output = "";
 		for (int i = 0; i < parentList.size(); i++) {
-			output += String.format("\n%-20s%-20s%-20s%-20s%-20s%-20s%-20s%-20s%-20s", parentList.get(i).getStudentID(),
-					parentList.get(i).getStudentName(), parentList.get(i).getGrade(), parentList.get(i).getClassroom(),
-					parentList.get(i).getTeacherName(), parentList.get(i).getParentName(),
-					parentList.get(i).getParentEmail(), parentList.get(i).getParentNumber(),
-					parentList.get(i).getCcaRegister());
+			output += String.format("\n%-20s%-20s%-20s%-20s%-20s%-20s%-20s%-20s", parentList.get(i).getID(),
+					parentList.get(i).getName(), parentList.get(i).getGrade(), parentList.get(i).getStudClass(),
+					parentList.get(i).getTeacher(), parentList.get(i).getParentName(),
+					parentList.get(i).getParentEmail(), parentList.get(i).getParentNumber());
 		}
 		return output;
 	}

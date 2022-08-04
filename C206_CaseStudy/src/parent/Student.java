@@ -1,7 +1,7 @@
 /**
  * @author 21027690
  */
-package students;
+package c206_graded;
 
 /**
  * @author 21027690
@@ -11,6 +11,8 @@ public class Student {
 
 	private String id;
 	private String name;
+	
+	//my main class use String not int data type
 	private int grade;
 	private String studClass;
 	private String teacher;

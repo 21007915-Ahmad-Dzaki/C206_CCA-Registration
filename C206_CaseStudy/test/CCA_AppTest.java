@@ -6,8 +6,6 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import cca_details.CCA;
-import cca_details.CCA_App;
 
 /**
  * I declare that this code was written by me.
@@ -21,7 +19,7 @@ import cca_details.CCA_App;
  * @author ahmad
  *
  */
-public class CCA_AppTest {
+public class C206_CaseStudyTest {
 	
 	private CCA cca1;
 	private CCA cca2;
@@ -34,12 +32,13 @@ public class CCA_AppTest {
 	@Before
 	public void setUp() throws Exception {
 //		prepare test data
+		ArrayList<Student> emptyList = new ArrayList<Student>();
 		cca1 = new CCA("Little League Soccer", "Soccer Club for Boys", 30, 
-				"Wednesday", "2:00PM - 4:00PM", "School Field", "Mr Izzat" );
+				"Wednesday", "2:00PM - 4:00PM", "School Field", "Mr Izzat",emptyList );
 		cca2 = new CCA("LEGO Expert", "LEGO building masters", 40, 
-				"Tuesday", "2:00PM - 3:00PM", "E62A", "Mr Jordon" );
+				"Tuesday", "2:00PM - 3:00PM", "E62A", "Mr Jordon",emptyList );
 		cca3 = new CCA("Swimming", "Swim faster", 30, 
-				"Tuesday", "2:00PM - 3:00PM", "Yishun Complex", "Mr Jordon" );
+				"Tuesday", "2:00PM - 3:00PM", "Yishun Complex", "Mr Jordon",emptyList );
 	}
 	
 	@Test
@@ -48,17 +47,17 @@ public class CCA_AppTest {
 		assertNotNull("Test if there is valid Camcorder arraylist to retrieve item", ccaList);
 		
 		//test if the list of cca retrieved from the SourceCentre is empty - boundary
-		String allCamcorder= CCA_App.retrieveAllCCA(ccaList);
+		String allCamcorder= C206_CaseStudy.retrieveAllCCA(ccaList);
 		String testOutput = "";
 		assertEquals("Check that ViewAllCamcorderlist", testOutput, allCamcorder);
 		
 		//Given an empty list, after adding 2 items, test if the size of the list is 2 - normal
-		CCA_App.addCCA(ccaList, cca1);
-		CCA_App.addCCA(ccaList, cca2);
+		C206_CaseStudy.addCCA(ccaList, cca1);
+		C206_CaseStudy.addCCA(ccaList, cca2);
 		assertEquals("Test that Camcorder arraylist size is 2", 2, ccaList.size());
 		
 		//test if the expected output string same as the list of cca retrieved from the SourceCentre	
-		allCamcorder= CCA_App.retrieveAllCCA(ccaList);
+		allCamcorder= C206_CaseStudy.retrieveAllCCA(ccaList);
 		testOutput = String.format("%-23s %-25s %-13d %-12s %-18s %-15s %-10s\n","Little League Soccer", "Soccer Club for Boys", 30, 
 				"Wednesday", "2:00PM - 4:00PM", "School Field", "Mr Izzat" );
 		testOutput += String.format("%-23s %-25s %-13d %-12s %-18s %-15s %-10s\n","LEGO Expert", "LEGO building masters", 40, 
@@ -75,13 +74,13 @@ public class CCA_AppTest {
 		
 		//Given an empty list, after adding 1 cca, the size of the list is 1 - normal
 		//The item just added is as same as the first cca of the list
-		CCA_App.addCCA(ccaList, cca1);
+		C206_CaseStudy.addCCA(ccaList, cca1);
 		assertEquals("Check that Camcorder arraylist size is 1", 1, ccaList.size());
 		assertSame("Check that Camcorder is added", cca1, ccaList.get(0));
 
 		//Add another cca. test The size of the list is 2? -normal
 		//The cca just added is as same as the second item of the list
-		CCA_App.addCCA(ccaList, cca2);
+		C206_CaseStudy.addCCA(ccaList, cca2);
 		assertEquals("Check that Camcorder arraylist size is 2", 2, ccaList.size());
 		assertSame("Check that Camcorder is added", cca2, ccaList.get(1));
 		
@@ -93,13 +92,14 @@ public class CCA_AppTest {
 	@Test
 	public void testDeleteCCA() {
 		// test that item must exist in the list to be deleted. (boundary)
-		CCA_App.addCCA(ccaList, cca1);
-		CCA_App.addCCA(ccaList, cca2);
+		C206_CaseStudy.addCCA(ccaList, cca1);
+		C206_CaseStudy.addCCA(ccaList, cca2);
 		assertFalse(ccaList.contains(cca3));
 		
 		//test that CCA is removed from list (normal)
-		CCA_App.deleteCCA(ccaList,cca2);
+		C206_CaseStudy.deleteCCA(ccaList,cca2);
 		assertFalse(ccaList.contains(cca2));
+		assertEquals(ccaList.size(),1);
 		
 		//test 
 	}
