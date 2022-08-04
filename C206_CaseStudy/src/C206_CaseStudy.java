@@ -447,6 +447,7 @@ public class C206_CaseStudy {
 	}
 	public static void viewAllCCA(ArrayList<CCA> ccaList) {
 		String output = "\nLIST OF CCA\n";
+		// additionally displays the vacancy of the CCA in real time
 		output += String.format("%-23s %-25s %-13s %-12s %-18s %-15s %-10s\n", 
 				"TITLE","DESCRIPTION","VACANCY","DAY","TIME","VENUE","IN-CHARGE");
 		output += retrieveAllCCA(ccaList);
