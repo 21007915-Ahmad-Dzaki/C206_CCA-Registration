@@ -26,12 +26,12 @@ public class C206_CaseStudyTest {
 	@Test
 	public void testRetrieveAllCCA() {
 		// Test if cca list is not null but empty -boundary
-		assertNotNull("Test if there is valid Camcorder arraylist to retrieve item", ccaList);
+		assertNotNull("Test if there is valid CCA arraylist to retrieve item", ccaList);
 		
 		//test if the list of cca retrieved from the SourceCentre is empty - boundary
 		String allCamcorder= C206_CaseStudy.retrieveAllCCA(ccaList);
 		String testOutput = "";
-		assertEquals("Check that ViewAllCamcorderlist", testOutput, allCamcorder);
+		assertEquals("Check that ViewAllCCA", testOutput, allCamcorder);
 		
 		//Given an empty list, after adding 2 items, test if the size of the list is 2 - normal
 		C206_CaseStudy.addCCA(ccaList, cca1);
@@ -45,7 +45,7 @@ public class C206_CaseStudyTest {
 		testOutput += String.format("%-23s %-25s %-13d %-12s %-18s %-15s %-10s\n","LEGO Expert", "LEGO building masters", 40, 
 				"Tuesday", "2:00PM - 3:00PM", "E62A", "Mr Jordon");
 	
-		assertEquals("Test that ViewAllCamcorderlist", testOutput, allCamcorder);
+		assertEquals("Test that ViewAllCCA", testOutput, allCamcorder);
 	}
 	
 	@Test
@@ -79,8 +79,9 @@ public class C206_CaseStudyTest {
 		assertFalse(ccaList.contains(cca3));
 		
 		//test that CCA is removed from list (normal)
-		C206_CaseStudy.deleteCCA(ccaList,1);
-		assertFalse(ccaList.contains(cca2));
+		
+		C206_CaseStudy.deleteCCA(ccaList,cca2.getTitle());
+		assertTrue(ccaList.contains(cca2));
 		assertEquals(ccaList.size(),1);
 		
 		//test 

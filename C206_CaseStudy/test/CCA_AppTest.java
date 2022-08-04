@@ -97,7 +97,7 @@ public class C206_CaseStudyTest {
 		assertFalse(ccaList.contains(cca3));
 		
 		//test that CCA is removed from list (normal)
-		C206_CaseStudy.deleteCCA(ccaList,cca2);
+		C206_CaseStudy.deleteCCA(ccaList,"LEGO Expert");
 		assertFalse(ccaList.contains(cca2));
 		assertEquals(ccaList.size(),1);
 		
