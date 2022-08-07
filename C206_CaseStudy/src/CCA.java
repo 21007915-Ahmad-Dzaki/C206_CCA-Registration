@@ -24,8 +24,9 @@ public class CCA {
     private String name;
     private ArrayList<Student> studentList;
     private boolean full;
+    private boolean isPaid;
 
-    public CCA(String title, String description, int classSize, String day, String time, String venue, String name, ArrayList<Student> studentList) {
+    public CCA(String title, String description, int classSize, String day, String time, String venue, String name, ArrayList<Student> studentList,boolean isPaid) {
         this.title = title;
         this.description = description;
         this.classSize = classSize;
@@ -35,9 +36,24 @@ public class CCA {
         this.name = name;
         this.studentList = studentList;
         full = false;
+        this.isPaid = isPaid;
     }
 
     /**
+	 * @return the isPaid
+	 */
+	public boolean isPaid() {
+		return isPaid;
+	}
+
+	/**
+	 * @param isPaid the isPaid to set
+	 */
+	public void setPaid(boolean isPaid) {
+		this.isPaid = isPaid;
+	}
+
+	/**
      * @return the full
      */
     public boolean isFull() {

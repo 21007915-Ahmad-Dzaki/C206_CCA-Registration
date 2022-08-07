@@ -25,11 +25,11 @@ public class C206_CaseStudyTest {
 	public void setUp() throws Exception {
 		ArrayList<Student> emptyList = new ArrayList<Student>();
 		cca1 = new CCA("Little League Soccer", "Soccer Club for Boys", 30, "Wednesday", "2:00PM - 4:00PM",
-				"School Field", "Mr Izzat", emptyList);
+				"School Field", "Mr Izzat", emptyList, false);
 		cca2 = new CCA("LEGO Expert", "LEGO building masters", 40, "Tuesday", "2:00PM - 3:00PM", "E62A", "Mr Jordon",
-				emptyList);
+				emptyList,false);
 		cca3 = new CCA("Swimming", "Swim faster", 30, "Tuesday", "2:00PM - 3:00PM", "Yishun Complex", "Mr Jordon",
-				emptyList);
+				emptyList,false);
 	}
 
 	@Test
@@ -116,9 +116,21 @@ public class C206_CaseStudyTest {
 	@Test
 	public void testAddParent() {// shi jie
 		ArrayList<Parent> parentList = new ArrayList<Parent>();
-		parentList.add(mem1);
+		C206_CaseStudy.addParent(parentList);
+		
 		assertSame("parentList size is 1", parentList.size(), 1);
 		assertFalse(parentList.isEmpty());
+	}
+	@Test
+	public void testAddParent2() {// shi jie
+		ArrayList<Parent> parentList = new ArrayList<Parent>();
+		C206_CaseStudy.addParent(parentList);
+		
+		C206_CaseStudy.addParent(parentList);
+		C206_CaseStudy.addParent(parentList);
+		String mem4 =parentList.get(1).getID();
+		assertSame("parentList at index 1 is same as m4", parentList.get(1).getID(), mem4);
+
 	}
 
 	@Test
@@ -136,17 +148,26 @@ public class C206_CaseStudyTest {
 
 		parentList.add(mem1);
 		parentList.add(mem2);
-		Parent mem3 = parentList.remove(1);
-		assertSame(mem3, mem2);
+		parentList.add(mem3);
+		Parent mem4 = parentList.remove(1);
+		assertTrue(mem2.getID().equals(mem4.getID()));
 
 	}
 
 	@Test
 	public void testDeleteBountry() {
+		ArrayList<Parent> parentList = new ArrayList<Parent>();
+		assertTrue(parentList.isEmpty());
+		parentList.add(mem1);
+		parentList.add(mem2);
+		
+		C206_CaseStudy.deleteParent(parentList);
+		assertTrue(parentList.size() == 1);
 	}
 
 	@Test
 	public void testDeleteError() {
+
 	}
 
 	@Test
@@ -160,8 +181,8 @@ public class C206_CaseStudyTest {
 		lily = new Student("21000000", "Ben Lim", 9, "W64H", "Ms Denise", 1);
 		marshal = new Student("21000001", "Ben Lim", 9, "W64H", "Ms Denise", 2);
 		football = new CCA("Little League Soccer", "Soccer Club for Boys", 30, "Wednesday", "2:00PM - 4:00PM",
-				"School Field", "Mr Izzat", studentList);
-		rugby = new CCA("Rugby", "RUSH", 40, "Tuesday", "2:00PM - 3:00PM", "E62A", "Mr Jordon", studentList);
+				"School Field", "Mr Izzat", studentList,false);
+		rugby = new CCA("Rugby", "RUSH", 40, "Tuesday", "2:00PM - 3:00PM", "E62A", "Mr Jordon", studentList,false);
 		// Student list is not null, so that can add a new student - boundary
 		assertNotNull("Check if there is valid arraylist to add to", football.getStudentList());
 

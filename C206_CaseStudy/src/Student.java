@@ -12,6 +12,7 @@ public class Student {
 	private int registrationID;
 	private boolean inCCA;
 	private CCA CCA;
+	private boolean hasPaid;
 	
 	public Student (String id, String name, int grade, String studClass, String teacher,int registrationID) {
 		this.id = id;
@@ -22,8 +23,26 @@ public class Student {
 		this.registrationID = registrationID;
 		this.inCCA = false;
 		this.CCA = null;
+		this.hasPaid = false;
 	}
 	
+	/**
+	 * @return the id
+	 */
+	/**
+	 * @return the hasPaid
+	 */
+	public boolean isHasPaid() {
+		return hasPaid;
+	}
+
+	/**
+	 * @param hasPaid the hasPaid to set
+	 */
+	public void setHasPaid(boolean hasPaid) {
+		this.hasPaid = hasPaid;
+	}
+
 	public String getID() {
 		return id;
 	}
