@@ -81,7 +81,7 @@ public class C206_CaseStudy {
 	 */
 	
 	//================================LOGIN CODES====================================================
-	
+	//by Wen Jiang
 	public static void startStud(ArrayList<CCA> ccaList,ArrayList<Student> studentList) {
 		
 		int optionLogin = -1;
@@ -109,6 +109,7 @@ public class C206_CaseStudy {
 			}
 		}
 	}
+	//by Dzaki
 	public static void startInstructor(String[] daysList,ArrayList<Instructor> insList, ArrayList<CCA> ccaList,ArrayList<Student> studentList) {
 
 		int optionLogin = -1;
@@ -145,6 +146,7 @@ public class C206_CaseStudy {
 			}
 		}
 	}
+	//by Dzaki
 	public static void startAdmin(String[] daysList,ArrayList<Admin> adminList, ArrayList<CCA> ccaList,ArrayList<Student> studentList, 
 			ArrayList<Parent> parentList, ArrayList<Category> catList,ArrayList<CCA> emptyCCAlist) {
 
@@ -201,6 +203,7 @@ public class C206_CaseStudy {
 			}
 		}
 	}
+	//by Dzaki
 	public static void startParent(ArrayList<Parent> parentList, ArrayList<CCA> ccaList, ArrayList<Student>studentList) {
 
 		int optionLogin = -1;
@@ -231,6 +234,7 @@ public class C206_CaseStudy {
 			}
 		}
 	}
+	// by Wen Jiang
 	private static String loginStud(ArrayList<Student> studentList) {
 		// TODO Auto-generated method stub
 		
@@ -261,6 +265,7 @@ public class C206_CaseStudy {
 		}
 		return login;
 	}
+	//by whole team
 	private static String loginParent(ArrayList<Parent> parentList) {
 		// TODO Auto-generated method stub
 		
@@ -291,6 +296,7 @@ public class C206_CaseStudy {
 		}
 		return login;
 	}
+	//by team
 	private static int loginInstructor(ArrayList<Instructor> insList) {
 		// TODO Auto-generated method stub
 		
@@ -320,6 +326,7 @@ public class C206_CaseStudy {
 		}
 		return login;
 	}
+	//by team
 	private static int loginAdmin(ArrayList<Admin> adminList) {
 		// TODO Auto-generated method stub
 		
@@ -431,6 +438,7 @@ public class C206_CaseStudy {
 		System.out.println("4. Login as Parent");
 		System.out.println("5. Exit");
 	}
+	//by Anessa
 	public static void viewCCAStudents(ArrayList<Student> studentList) {
 		// TODO Auto-generated method stub
 		String output = String.format("%-30s %-30s", "STUDENTS","CCA TITLE");
@@ -441,6 +449,7 @@ public class C206_CaseStudy {
 			}
 		System.out.println(output);
 	}
+	//by Dzaki
 	public static String retrieveAllCCA(ArrayList<CCA> ccaList) {
 		String output = "";
 
@@ -449,6 +458,7 @@ public class C206_CaseStudy {
 		}
 		return output;
 	}
+	//by Dzaki
 	public static void viewAllCCA(ArrayList<CCA> ccaList) {
 		String output = "\nLIST OF CCA\n";
 		// additionally displays the vacancy of the CCA in real time
@@ -458,6 +468,7 @@ public class C206_CaseStudy {
 		
 		System.out.println(output);
 	}
+	//by Anessa
 	public static void viewAllStudents(ArrayList<Student> studList) {
 		String output = "";
 		output += String.format("%-10s%-15s%-10s%-10s%-20s%s\n", "ID", "NAME", "GRADE", "CLASS", "TEACHER","REG. ID");
@@ -468,6 +479,7 @@ public class C206_CaseStudy {
 		}
 		System.out.println(output);
 	}
+	//by Shi Jie
 	private static void viewAllParents(ArrayList<Parent> parentList) {
 		// TODO Auto-generated method stub
 		String output = String.format("%-20s%-20s%-20s%-20s%-20s%-20s%-20s%-20s%-20s", "StudentID", "Student Name",
@@ -476,7 +488,7 @@ public class C206_CaseStudy {
 
 		System.out.println(output);
 	}
-
+	//by Shi Jie
 	private static String getParentDetails(ArrayList<Parent> parentList) {
 		String output = "";
 		for (int i = 0; i < parentList.size(); i++) {
@@ -487,6 +499,7 @@ public class C206_CaseStudy {
 		}
 		return output;
 	}
+	//by Syahrul
 	public static String loadDataCat(ArrayList<Category> obj) {
 		String output = "";
 		for (Category C : obj) {
@@ -494,6 +507,7 @@ public class C206_CaseStudy {
 		}
 		return output;
 	}
+	//by Syahrul
 	public static void viewCat(ArrayList<Category> obj) {
 		// TODO Auto-generated method stub
 		String output = "Categories: \n";
@@ -504,7 +518,7 @@ public class C206_CaseStudy {
 	}
 	
 	//=============================================ADD Methods======================================//
-	
+	// WenJiang and Dzaki
 	public static void studCCAReg(ArrayList<CCA> ccaList,ArrayList<Student> studentList, String id) {
         // TODO Auto-generated method stub
         String output = String.format("%-30s", "CCA List:");
@@ -557,11 +571,7 @@ public class C206_CaseStudy {
             System.out.println("Invalid option");
         }
     }
-	/**
-	 * @param ccaList
-	 */
-	
-	
+	//by Dzaki
 	 public static CCA inputCCAadd(String[] daysList) {
 		ArrayList<Student> studentList = new ArrayList<Student>();
 		String title = Helper.readString("Enter CCA Title > ");
@@ -583,10 +593,11 @@ public class C206_CaseStudy {
 		return cca;
 		
 	}
-	
+	//by Dzaki
 	public static void addCCA(ArrayList<CCA> ccaList, CCA cca) {		
 		ccaList.add(cca);
 	}
+	//by Wen Jiang & Dzaki
 	public static void addStudentToCCA(ArrayList<CCA> ccaList,ArrayList<Student> studentList) {
 		// TODO Auto-generated method stub
 		String output = String.format("%-30s", "CCA List:");
@@ -646,6 +657,7 @@ public class C206_CaseStudy {
 		}
 
 	}
+	//by Anessa
 	public static void addStudent(ArrayList<Student> studList) {
 		boolean studAdd = false;
 		String id = Helper.readString("Enter new student ID > ");
@@ -667,6 +679,7 @@ public class C206_CaseStudy {
 			System.out.println("Failed to add new student!");
 		}
 	}
+	//by Shi Jie
 	public static void addParent(ArrayList<Parent> parentList) {
 		// TODO Auto-generated method stub
 		String studID = Helper.readString("Enter student ID > ");
@@ -706,17 +719,19 @@ public class C206_CaseStudy {
 		}
 
 	}
+	//by Syahrul
 	public static Category inputAddCat(ArrayList<CCA> catList) {
 		String input = Helper.readString("Enter Category name > ");
 		Category input2 = new Category(input,catList);
 		return input2;
 	}
-	
+	//by Syahrul
 	public static void addCat(ArrayList<Category> obj, Category input) {
 		obj.add(input);
 		System.out.println("CCA Category added!");
 	}
 	//=======================================DELETE METHODS=====================================================
+	//by Dzaki
 	public static CCA inputCCAdel(ArrayList<CCA> ccaList) {
 		boolean found = false;
 		String title = Helper.readString("Enter CCA Title > ");
@@ -736,6 +751,7 @@ public class C206_CaseStudy {
 		}
 		
 	}
+	//by Dzaki
 	public static void deleteCCA(ArrayList<CCA> ccaList, CCA c) {
 		if (c != null) {
 			
@@ -746,6 +762,7 @@ public class C206_CaseStudy {
 			System.out.println("CCA not found!");
 		}
 	}
+	//by Anessa
 	public static void deleteStudent(ArrayList<Student> studList) {
 		String id = Helper.readString("Enter student ID to be deleted > ");
 		boolean delete = false;
@@ -762,6 +779,7 @@ public class C206_CaseStudy {
 			System.out.println("Failed to delete student!");
 		}
 	}
+	//by Shi jie
 	public static void deleteParent(ArrayList<Parent> parentList) {
 		// TODO Auto-generated method stub
 		int DelRegisterationID = Helper.readInt("enter the registeration ID");
@@ -778,6 +796,7 @@ public class C206_CaseStudy {
 		}
 
 	}
+	//by Shi Jie
 	public static boolean isExist(ArrayList<Category> obj, String input) {
 		boolean check = false;
 		for (int i = 0; i < obj.size(); i++) {
@@ -788,6 +807,7 @@ public class C206_CaseStudy {
 		}
 		return check;
 	}
+	//by Syahrul
 	public static void removeCat(ArrayList<Category> obj) {
 		String input = Helper.readString("Enter Category name > ");
 		boolean check = isExist(obj, input);
@@ -798,6 +818,7 @@ public class C206_CaseStudy {
 			System.out.println("Name does not exist! Remove fail!");
 		}
 	}
+	//by Shi Jie
 	public static int checkRegisterationID(ArrayList<Parent> parentList, Random rand, int ccaRegister) {
 		for (int i = 0; i < parentList.size(); i++) {
 			if (ccaRegister == parentList.get(i).getRegistrationID()) {
