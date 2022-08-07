@@ -474,15 +474,26 @@ public class C206_CaseStudy {
 
 		System.out.println(output);
 	}
+	
+	public static String retrieveAllStudents(ArrayList<Student> studentList) {
+		String output = "";
 
-	public static void viewAllStudents(ArrayList<Student> studList) {
+		for (int i = 0; i < studentList.size(); i++) {
+			output += String.format("%-10s%-15s%-10d%-10s%-20s%s\n", studentList.get(i).getID(), studentList.get(i).getName(),
+					studentList.get(i).getGrade(), studentList.get(i).getStudClass(), studentList.get(i).getTeacher(),
+					studentList.get(i).getRegistrationID());
+		}
+		return output;
+	}
+
+	public static void viewAllStudents(ArrayList<Student> studentList) {
 		String output = "";
 		output += String.format("%-10s%-15s%-10s%-10s%-20s%s\n", "ID", "NAME", "GRADE", "CLASS", "TEACHER", "REG. ID");
 
-		for (int i = 0; i < studList.size(); i++) {
-			output += String.format("%-10s%-15s%-10d%-10s%-20s%s\n", studList.get(i).getID(), studList.get(i).getName(),
-					studList.get(i).getGrade(), studList.get(i).getStudClass(), studList.get(i).getTeacher(),
-					studList.get(i).getRegistrationID());
+		for (int i = 0; i < studentList.size(); i++) {
+			output += String.format("%-10s%-15s%-10d%-10s%-20s%s\n", studentList.get(i).getID(), studentList.get(i).getName(),
+					studentList.get(i).getGrade(), studentList.get(i).getStudClass(), studentList.get(i).getTeacher(),
+					studentList.get(i).getRegistrationID());
 		}
 		System.out.println(output);
 	}
@@ -631,8 +642,9 @@ public class C206_CaseStudy {
 		}
 
 	}
+	
 
-	public static void addStudent(ArrayList<Student> studList) {
+	public static void inputStudAdd(ArrayList<Student> studentList) {
 		boolean studAdd = false;
 		String id = Helper.readString("Enter new student ID > ");
 		String name = Helper.readString("Enter new student name > ");
@@ -641,8 +653,9 @@ public class C206_CaseStudy {
 		String teacher = Helper.readString("Enter new student classroom teacher > ");
 		int regID = Helper.readInt("Enter Registration ID");
 
-		for (int i = 0; i < studList.size();) {
-			studList.add(new Student(id, name, grade, studClass, teacher, regID));
+		for (int i = 0; i < studentList.size();) {
+			Student student = new Student(id, name, grade, studClass, teacher, regID);
+			studentList.add(student);
 			studAdd = true;
 			break;
 		}
@@ -652,6 +665,10 @@ public class C206_CaseStudy {
 		} else {
 			System.out.println("Failed to add new student!");
 		}
+	}
+	
+	public static void addStudent(ArrayList<Student> studentList, Student student) {
+		studentList.add(student);
 	}
 
 	public static void addParent(ArrayList<Parent> parentList) {
@@ -738,18 +755,29 @@ public class C206_CaseStudy {
 		}
 	}
 
-	public static void deleteStudent(ArrayList<Student> studList) {
+	public static Student inputStudentDel(ArrayList<Student> studentList) {
 		String id = Helper.readString("Enter student ID to be deleted > ");
 		boolean delete = false;
+		int key = 0;
 
-		for (int i = 0; i < studList.size(); i++) {
-			if (studList.get(i).getID().equals(id)) {
-				studList.remove(i);
+		for (int i = 0; i < studentList.size(); i++) {
+			if (studentList.get(i).getID().equals(id)) {
+				
 				delete = true;
 			}
 		}
 		if (delete) {
-			System.out.println("Student deleted!");
+			System.out.println(key);
+			return studentList.get(key);
+		} else {
+			return null;
+		}
+	}
+	
+	public static void deleteStudent(ArrayList<Student> studentList, Student s) {
+		if ( s != null ) {		
+			studentList.remove(s);
+			System.out.println("Student has been deleted!");
 		} else {
 			System.out.println("Failed to delete student!");
 		}
