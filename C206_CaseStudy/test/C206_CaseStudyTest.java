@@ -34,13 +34,15 @@ public class C206_CaseStudyTest {
 	private ArrayList<Category> obj;
 	@Before
 	public void setUp() throws Exception {
-		ArrayList<Student> emptyList = new ArrayList<Student>();
+		ArrayList<Student> soccer = new ArrayList<Student>();
+		ArrayList<Student> lego = new ArrayList<Student>();
+		ArrayList<Student> swim = new ArrayList<Student>();
 		cca1 = new CCA("Little League Soccer", "Soccer Club for Boys", 30, "Wednesday", "2:00PM - 4:00PM",
-				"School Field", "Mr Izzat", emptyList, false);
+				"School Field", "Mr Izzat", soccer, false);
 		cca2 = new CCA("LEGO Expert", "LEGO building masters", 40, "Tuesday", "2:00PM - 3:00PM", "E62A", "Mr Jordon",
-				emptyList,false);
+				lego,false);
 		cca3 = new CCA("Swimming", "Swim faster", 30, "Tuesday", "2:00PM - 3:00PM", "Yishun Complex", "Mr Jordon",
-				emptyList,false);
+				swim,false);
 		
 		stud1 = new Student("6","Ben Lim", 6, "W64H", "Ms Denise",6);
 		stud2 = new Student("5","Izzat", 6, "W64H", "Mr Joseph",5);
@@ -79,6 +81,17 @@ public class C206_CaseStudyTest {
 				"LEGO building masters", 40, "Tuesday", "2:00PM - 3:00PM", "E62A", "Mr Jordon");
 
 		assertEquals("Test that ViewAllCCA", testOutput, allCCA);
+		
+		// test that vacancy of CCA is updated when student registered and viewed again.
+		//use one student to apply for Little League Soccer
+		studentList.add(stud1);
+		C206_CaseStudy.addStudentToCCA(ccaList,studentList);
+		allCCA = C206_CaseStudy.retrieveAllCCA(ccaList);
+		testOutput = String.format("%-23s %-25s %-13d %-12s %-18s %-15s %-10s\n", "Little League Soccer",
+				"Soccer Club for Boys", 29, "Wednesday", "2:00PM - 4:00PM", "School Field", "Mr Izzat");
+		testOutput += String.format("%-23s %-25s %-13d %-12s %-18s %-15s %-10s\n", "LEGO Expert",
+				"LEGO building masters", 40, "Tuesday", "2:00PM - 3:00PM", "E62A", "Mr Jordon");
+		assertEquals("Test that vacancy is updated", testOutput, allCCA);
 	}
 
 	@Test
