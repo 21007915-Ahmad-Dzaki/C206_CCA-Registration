@@ -845,7 +845,7 @@ public class C206_CaseStudy {
 		}
 
 	}
-	//by Shi Jie
+	//by Syahrul
 	public static boolean isExist(ArrayList<Category> obj, String input) {
 		boolean check = false;
 		for (int i = 0; i < obj.size(); i++) {
