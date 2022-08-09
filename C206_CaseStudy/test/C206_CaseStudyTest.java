@@ -102,7 +102,10 @@ public class C206_CaseStudyTest {
 		// test that title for CCA object should not be empty
 		assertFalse(cca1.getTitle().isEmpty());
 
-		// test that
+		// test that classSizes are more than 0 and less than 50
+		assertTrue(cca1.getClassSize()<50 && cca1.getClassSize()>0);
+		assertTrue(cca2.getClassSize()<50 && cca1.getClassSize()>0);
+		assertTrue(cca3.getClassSize()<50 && cca1.getClassSize()>0);
 
 	}
 
