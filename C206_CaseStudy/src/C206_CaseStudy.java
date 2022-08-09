@@ -47,11 +47,11 @@ public class C206_CaseStudy {
 		insList.add(new Instructor(4321,"Mr Jordon","roar"));
 		
 		//student login use 6,6
-		studentList.add(new Student("6","Ben Lim", 4, "W64H", "Ms Denise",6));
-		studentList.add(new Student("5","Izzat", 5, "W64H", "Mr Joseph",5));
-		studentList.add(new Student("3","Lim Chong Hin", 6, "W64H", "Ms Denise",3));
-		studentList.add(new Student("4","Jordon", 6, "W64H", "Mr Ivan",4));
-		studentList.add(new Student("2","Shi Jie", 1, "W64H", "Mr Ivan", 0));
+		studentList.add(new Student("S6","Ben Lim", 4, "W64H", "Ms Denise",6));
+		studentList.add(new Student("S5","Izzat", 5, "W64H", "Mr Joseph",5));
+		studentList.add(new Student("S3","Lim Chong Hin", 6, "W64H", "Ms Denise",3));
+		studentList.add(new Student("S4","Jordon", 6, "W64H", "Mr Ivan",4));
+		studentList.add(new Student("S2","Shi Jie", 1, "W64H", "Mr Ivan", 0));
 		
 		
 		ccaList.add(cca1);
@@ -90,6 +90,7 @@ public class C206_CaseStudy {
 			optionLogin = Helper.readInt("Enter choice > ");
 			if (optionLogin == Option_LOGIN) {
 				String login = loginStud(studentList);
+				
 				if (login !="zero" ) {
 					int option = -1;
 					while (option != Option_LOGOUT) {
@@ -187,7 +188,7 @@ public class C206_CaseStudy {
 						}else if (option == 11) {
 							removeCat(catList);
 						}else if (option == 12) {
-							addParent(parentList);
+							addParent(parentList,studentList);
 						}else if (option == 13) {
 							getParentDetails(parentList);
 							viewAllParents(parentList);
@@ -228,7 +229,7 @@ public class C206_CaseStudy {
 					}
 				}
 			} else if(optionLogin == 2) {
-				addParent(parentList);
+				addParent(parentList,studentList);
 			}
 			else if (optionLogin == 3) {
 				System.out.println("Thank you for using CCA registration system!");
@@ -240,28 +241,35 @@ public class C206_CaseStudy {
 		// TODO Auto-generated method stub
 		
 		boolean foundStudent = false;
+		boolean aboveP4 = false;
 		boolean success = false;
 		String login = "zero";
 		while (!success) {
 			String LoginStudentID = Helper.readString("Enter Student ID > ");
 			int registrationID = Helper.readInt("Enter CCA Registration ID > ");
-			
+
 			for (Student s : studentList) {
-				if (LoginStudentID.equals(s.getID())) { 
+				if (LoginStudentID.equals(s.getID())) {
 					foundStudent = true;
-					if(registrationID == s.getRegistrationID()) {
-						System.out.println("\nLogin Successful!\n");
-						
-						success = true;
-						login = LoginStudentID;
-						
-					}else {
-						System.out.println("Invalid CCA registration ID, please try again \n");
+					if (s.getGrade()>=4) {
+						aboveP4 = true;
+						if(registrationID == s.getRegistrationID()) {
+							System.out.println("\nLogin Successful!\n");
+
+							success = true;
+							login = LoginStudentID;
+
+						}else {
+							System.out.println("Invalid CCA registration ID, please try again \n");
+						}
 					}
 				}
 			}
 			if (!foundStudent) {
 				System.out.println("Invalid student ID, please try again\n");
+			}
+			if (!aboveP4) {
+				System.out.println("Kindly register with Parent");
 			}
 		}
 		return login;
@@ -693,9 +701,19 @@ public class C206_CaseStudy {
 
 	}
 	//by Shi Jie
-	public static void addParent(ArrayList<Parent> parentList) {
+	public static void addParent(ArrayList<Parent> parentList, ArrayList<Student> studentList) {
 		// TODO Auto-generated method stub
+		boolean parentOfStudent = false;
+		boolean studentBelowP4 = false;
 		String studID = Helper.readString("Enter student ID > ");
+		for (Student s : studentList) {
+			if (s.getID().equals(studID)) {
+				parentOfStudent = true;
+				if (s.getGrade()<4) {
+					studentBelowP4 = true;
+				}
+			}
+		}
 		String studName = Helper.readString("Enter student Name > ");
 		int grade = Helper.readInt("Enter student grade > ");
 		String classroom = Helper.readString("Enter classroom > ");
@@ -724,11 +742,19 @@ public class C206_CaseStudy {
 			// ensure that parents get the unique CCAregisterID.
 			ccaRegister = checkRegisterationID(parentList, rand, ccaRegister);
 
+			if (parentOfStudent && studentBelowP4) {
 			Parent mem = new Parent(studID, studName, grade, classroom, teacherName,ccaRegister, parentName,
 					parentEmail, parentNumber);
 			parentList.add(mem);
 			System.out.println("Account have been successsfuly created");
 			System.out.println("Your CCA registeration ID is " + ccaRegister);
+			}
+			if (!parentOfStudent) {
+				System.out.println("Your child is not registered with the school");
+			}
+			if (!studentBelowP4) {
+				System.out.println("Kindly ask your child to apply by themselves");
+			}
 		}
 
 	}

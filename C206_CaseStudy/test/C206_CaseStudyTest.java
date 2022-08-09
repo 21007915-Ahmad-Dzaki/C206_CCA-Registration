@@ -14,6 +14,7 @@ public class C206_CaseStudyTest {
 	private Student stud1;
 	private Student stud2;
 	private Student stud3;
+	private Student stud4;
 
 	private ArrayList<CCA> ccaList = new ArrayList<CCA>();
 	private ArrayList<Student> studentList = new ArrayList<Student>();
@@ -25,6 +26,12 @@ public class C206_CaseStudyTest {
 	private Parent mem2 = new Parent("7", "Dzaki", 9, "W64H", "Ms jasmine", 7, "Dzaki", "Dzaki@gmail.com", 90110241);
 	private Parent mem3 = new Parent("8", "Dzaki", 9, "W64H", "Ms jasmine", 9, "Dzaki", "Dzaki@gmail.com", 90110241);
 
+	private Category c1;
+	private Category c2;
+	private Category c3;
+	
+	private ArrayList<CCA> detail;
+	private ArrayList<Category> obj;
 	@Before
 	public void setUp() throws Exception {
 		ArrayList<Student> emptyList = new ArrayList<Student>();
@@ -35,9 +42,16 @@ public class C206_CaseStudyTest {
 		cca3 = new CCA("Swimming", "Swim faster", 30, "Tuesday", "2:00PM - 3:00PM", "Yishun Complex", "Mr Jordon",
 				emptyList,false);
 		
-		stud1 = new Student("6","Ben Lim", 9, "W64H", "Ms Denise",6);
-		stud2 = new Student("5","Izzat", 9, "W64H", "Mr Joseph",5);
-		stud3 = new Student("3","Lim Chong Hin", 9, "W64H", "Ms Denise",3);
+		stud1 = new Student("6","Ben Lim", 6, "W64H", "Ms Denise",6);
+		stud2 = new Student("5","Izzat", 6, "W64H", "Mr Joseph",5);
+		stud3 = new Student("3","Lim Chong Hin", 5, "W64H", "Ms Denise",3);
+		stud4 = new Student("2","Lee Ah", 2, "W64H", "Ms Denise",2);
+		c1 = new Category("Sports", detail);
+		c2 = new Category("Musics", detail);
+		c3 = new Category("Arts", detail);
+		
+		detail = new ArrayList<CCA>();
+		obj = new ArrayList<Category>();
 	}
 
 	@Test
@@ -137,8 +151,8 @@ public class C206_CaseStudyTest {
 		//test if the expected output string same as the list of Student retrieved from the C206_CaseStudy
 		allStudent= C206_CaseStudy.retrieveAllStudents(studentList);
 
-		testOutput = String.format("%-10s%-15s%-10d%-10s%-20s%s\n", "6","Ben Lim", 9, "W64H", "Ms Denise",6);
-		testOutput += String.format("%-10s%-15s%-10d%-10s%-20s%s\n","5","Izzat", 9, "W64H", "Mr Joseph",5);
+		testOutput = String.format("%-10s%-15s%-10d%-10s%-20s%s\n", "6","Ben Lim", 6, "W64H", "Ms Denise",6);
+		testOutput += String.format("%-10s%-15s%-10d%-10s%-20s%s\n","5","Izzat", 6, "W64H", "Mr Joseph",5);
 
 		assertEquals("Check that ViewAllStudentlist", testOutput, allStudent);
 	}
@@ -192,21 +206,29 @@ public class C206_CaseStudyTest {
 
 	@Test
 	public void testAddParent() {// shi jie
+		studentList.add(stud1);
+		studentList.add(stud2);
+		studentList.add(stud3);
+		studentList.add(stud4);
 		ArrayList<Parent> parentList = new ArrayList<Parent>();
-		C206_CaseStudy.addParent(parentList);
+		C206_CaseStudy.addParent(parentList,studentList);
 		
 		assertSame("parentList size is 1", parentList.size(), 1);
 		assertFalse(parentList.isEmpty());
 	}
 	@Test
 	public void testAddParent2() {// shi jie
+		studentList.add(stud1);
+		studentList.add(stud2);
+		studentList.add(stud3);
+		studentList.add(stud4);
 		ArrayList<Parent> parentList = new ArrayList<Parent>();
-		C206_CaseStudy.addParent(parentList);
-		
-		C206_CaseStudy.addParent(parentList);
-		C206_CaseStudy.addParent(parentList);
-		String mem4 =parentList.get(1).getID();
-		assertSame("parentList at index 1 is same as m4", parentList.get(1).getID(), mem4);
+		C206_CaseStudy.addParent(parentList,studentList);
+//		
+//		C206_CaseStudy.addParent(parentList,studentList);
+//		C206_CaseStudy.addParent(parentList,studentList);
+		String mem4 =parentList.get(0).getID();
+		assertSame("parentList at index 1 is same as m4", parentList.get(0).getID(), mem4);
 
 	}
 
@@ -220,7 +242,7 @@ public class C206_CaseStudyTest {
 	}
 
 	@Test
-	public void testDeleteNormal() {
+	public void testDeleteNormal() {//shi jie
 		ArrayList<Parent> parentList = new ArrayList<Parent>();
 
 		parentList.add(mem1);
@@ -254,7 +276,7 @@ public class C206_CaseStudyTest {
 	}
 
 	@Test
-	public void testAddStudentToCCA() {
+	public void testAddStudentToCCA() {//wenjiang
 		lily = new Student("21000000", "Ben Lim", 9, "W64H", "Ms Denise", 1);
 		marshal = new Student("21000001", "Ben Lim", 9, "W64H", "Ms Denise", 2);
 		football = new CCA("Little League Soccer", "Soccer Club for Boys", 30, "Wednesday", "2:00PM - 4:00PM",
@@ -282,7 +304,7 @@ public class C206_CaseStudyTest {
 	}
 
 	@Test
-	public void testStudentsInCCA() {
+	public void testStudentsInCCA() {//wenjiang
 		lily = new Student("21000000", "Ben Lim", 9, "W64H", "Ms Denise", 1);
 		marshal = new Student("21000001", "Ben Lim", 9, "W64H", "Ms Denise", 2);
 		// Test if student list is not null but empty -boundary
@@ -313,7 +335,7 @@ public class C206_CaseStudyTest {
 	}
 
 	@Test
-	public void testLogin() {
+	public void testLogin() {//wenjiang
 		lily = new Student("21000000", "Ben Lim", 9, "W64H", "Ms Denise", 1);
 		marshal = new Student("21000001", "Ben Lim", 9, "W64H", "Ms Denise", 2);
 		// Test that student id and cca registration id is not null in student
@@ -334,6 +356,68 @@ public class C206_CaseStudyTest {
 		assertSame("check that student id is the same", lily.getRegistrationID(),
 				studentList.get(0).getRegistrationID());
 
+	}
+	@Test
+	public void testViewAllCat() {
+		//Test if obj list is empty (boundary)
+		assertNotNull(obj);
+		
+		//Test if list taken from main but its empty (boundary)
+		String methodTest = C206_CaseStudy.loadDataCat(obj);
+		String empty = "";
+		assertEquals(methodTest, empty);
+		
+		//Test after adding 3 Categories, total object in list is 3 (normal)
+		C206_CaseStudy.addCat(obj, c1);
+		C206_CaseStudy.addCat(obj, c2);
+		C206_CaseStudy.addCat(obj, c3);
+		assertEquals(obj.size(), 3);
+		
+		//Test if output is equal to the data retrieve from list
+		String realOutput = "Categories: " + C206_CaseStudy.loadDataCat(obj);
+		String testOuput = "Categories: \n- Sports\n- Musics\n- Arts";
+		assertEquals(realOutput, testOuput);
+	}
+
+	@Test
+	public void testAddCat() {
+		//Test list is not null so that is able to add categories (boundary)
+		assertNotNull(obj);
+		
+		//Test after added a Category, the size of the list is 1 (normal) (a)
+		//Test that item added to the list is equals to the first item in the list (b)
+		C206_CaseStudy.addCat(obj, c1);	
+		assertEquals(1, obj.size()); //(a)
+		assertSame(c1, obj.get(0)); //(b)
+		
+		//Test if item list is 2 when added another Category (normal) (a)
+		//Test that item added to the list is equals to the second item in the list (b)
+		C206_CaseStudy.addCat(obj, c2);
+		assertEquals(2, obj.size()); //(a)
+		assertSame(c2, obj.get(1)); //(b)
+		
+		//Test if item list is 3 when added another Category (normal) (a)
+		//Test that item added to the list is equals to the third item in the list (b)
+		C206_CaseStudy.addCat(obj, c3);
+		assertEquals(3, obj.size()); //(a)
+		assertSame(c3, obj.get(2)); //(b)
+	}
+	
+	@Test
+	public void testRemoveCat() {
+		//Test list is not empty so that it can remove categories (boundary)
+		C206_CaseStudy.addCat(obj, c1);
+		C206_CaseStudy.addCat(obj, c2);
+		C206_CaseStudy.addCat(obj, c3);
+		assertTrue(!obj.isEmpty());
+		
+		//Test if item list is 2 when a Category is removed (normal) (use: Sports)
+		C206_CaseStudy.removeCat(obj);
+		assertEquals(2, obj.size());
+		
+		//Test if Category list remains 2 when removing a Category that does not exist (Error) (use: Sports)
+		C206_CaseStudy.removeCat(obj);
+		assertEquals(2, obj.size());
 	}
 
 	@After
